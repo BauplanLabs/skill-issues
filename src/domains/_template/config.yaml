@@ -1,0 +1,27 @@
+# upstream_skills_raw / upstream_skills_api: raw content + GitHub contents API
+# URLs the reset-skills and skill-diff commands read to restore/compare the
+# local SKILL.md files against upstream
+upstream_skills_raw: https://raw.githubusercontent.com/<org>/<skills-repo>/main/<path>/skills
+upstream_skills_api: https://api.github.com/repos/<org>/<skills-repo>/contents/<path>/skills
+# catalog listing used to validate expected_skills; can also be a local path
+skills_catalog_url: https://api.github.com/repos/<org>/<skills-repo>/contents/<path>/skills
+
+models:
+  # agent and judge are harness-native model ids, exported as AGENT_MODEL /
+  # JUDGE_MODEL env vars for harbor
+  agent: <harness-native-model-id>
+  judge: <harness-native-model-id>
+  # generator is a full litellm model id used in-process for task generation,
+  # semantic review, and GEPA reflection
+  generator: <provider>/<model-id>
+  # explicit cap because litellm otherwise fills in the model's maximum output
+  # tokens, which the provider rejects for non-streaming requests
+  generator_max_tokens: 16384
+
+paths:
+  # resolved by main.py relative to this domain package directory
+  harness: harness
+  skills: harness/tasks/template-eval/environment/skills
+  jobs: harness/jobs
+  dataset_entry: harness/tasks/template-eval/solution/dataset_entry.json
+  dataset: dataset

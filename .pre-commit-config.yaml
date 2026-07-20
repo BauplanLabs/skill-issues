@@ -1,0 +1,13 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.12
+    hooks:
+      - id: ruff-format
+      # ruff-check is the current hook id; ruff is a deprecated alias for the same command
+      - id: ruff-check
+        args: [--fix]
+
+  - repo: https://github.com/astral-sh/ty-pre-commit
+    rev: v0.0.59
+    hooks:
+      - id: ty

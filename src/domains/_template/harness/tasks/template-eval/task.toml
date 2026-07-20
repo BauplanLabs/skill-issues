@@ -1,0 +1,44 @@
+schema_version = "1.1"
+
+[task]
+name = "template-eval"
+description = "Run a generated benchmark task through the oracle agent and grade the result."
+keywords = []
+[[task.authors]]
+name = "<your-name>"
+
+[metadata]
+
+[verifier]
+timeout_sec = 600.0
+
+[agent]
+timeout_sec = 500.0
+
+[environment]
+# In-container path harbor copies skills from into the agent's skills config dir.
+# Skills land here via the Dockerfile `COPY skills/`; the optimizer rewrites that
+# build-context file per candidate, so harbor's content-hashed rebuild delivers it.
+skills_dir = "/app/.claude/skills"
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0
+allow_internet = true
+mcp_servers = []
+
+[verifier.env]
+ANTHROPIC_API_KEY = "${ANTHROPIC_API_KEY}"
+JUDGE_MODEL = "${JUDGE_MODEL}"
+# Skill under optimization; set by optimize.py so the trace check gates on only
+# this skill. Empty in normal eval, where all expected_skills are required.
+OPTIMIZE_TARGET_SKILL = "${OPTIMIZE_TARGET_SKILL:-}"
+
+[environment.env]
+ANTHROPIC_API_KEY = "${ANTHROPIC_API_KEY}"
+AGENT_MODEL = "${AGENT_MODEL}"
+# domain-specific secrets (backend API keys, endpoints) go here, e.g.
+# BACKEND_API_ENDPOINT = "${BACKEND_API_ENDPOINT}"
+
+[solution.env]

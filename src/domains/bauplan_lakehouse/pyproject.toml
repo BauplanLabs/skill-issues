@@ -1,0 +1,9 @@
+[project]
+name = "bauplan_lakehouse"
+version = "1.0.0"
+description = "Example domain: benchmark tasks and skill optimization for a Bauplan lakehouse"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "bauplan~=0.1.16",
+]

@@ -1,0 +1,20 @@
+n_concurrent_trials: 1
+
+environment:
+  type: modal
+  kwargs:
+    secrets:
+      - bauplan-api-key-lisa
+    # fresh Modal app so harbor builds a new image with the current task code,
+    # leaving the shared __harbor__ app untouched; embeds the base user so
+    # `just launch-parallel` gives each worker its own app via the same rewrite
+    # that renames the secret
+    app_name: __harbor_gepa_lisa__
+
+agents:
+  - name: oracle
+
+datasets:
+  - path: ./tasks
+    task_names:
+      - bauplan-eval

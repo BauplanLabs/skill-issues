@@ -1,0 +1,43 @@
+schema_version = "1.1"
+
+[task]
+name = "bauplan/bauplan-eval"
+description = "Run the active dataset entry's prompt through a skill-equipped agent against a live Bauplan lakehouse, then grade guardrails, end state, and the reply."
+keywords = []
+[[task.authors]]
+name = "Bauplan"
+
+[metadata]
+
+[verifier]
+timeout_sec = 600.0
+
+[agent]
+timeout_sec = 500.0
+
+[environment]
+# In-container path harbor copies skills from into the agent's skills config dir.
+# Skills land here via the Dockerfile `COPY skills/`; the optimizer rewrites that
+# build-context file per candidate, so harbor's content-hashed rebuild delivers it.
+skills_dir = "/app/.claude/skills"
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0
+allow_internet = true
+mcp_servers = []
+
+[verifier.env]
+ANTHROPIC_API_KEY = "${ANTHROPIC_API_KEY}"
+JUDGE_MODEL = "${JUDGE_MODEL}"
+# Skill under optimization; set by optimize.py so verify_expected_skills_used gates
+# on only this skill. Empty in normal eval, where all expected_skills are required.
+OPTIMIZE_TARGET_SKILL = "${OPTIMIZE_TARGET_SKILL:-}"
+
+[environment.env]
+ANTHROPIC_API_KEY = "${ANTHROPIC_API_KEY}"
+BAUPLAN_API_ENDPOINT = "${BAUPLAN_API_ENDPOINT}"
+AGENT_MODEL = "${AGENT_MODEL}"
+
+[solution.env]
