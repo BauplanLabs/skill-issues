@@ -1,0 +1,24 @@
+upstream_skills_raw: https://raw.githubusercontent.com/BauplanLabs/bauplan-skills/main/plugins/bauplan/skills
+upstream_skills_api: https://api.github.com/repos/BauplanLabs/bauplan-skills/contents/plugins/bauplan/skills
+skills_catalog_url: https://api.github.com/repos/BauplanLabs/bauplan-skills/contents/plugins/bauplan/skills
+reference_urls:
+  sdk: https://docs.bauplanlabs.com/reference/bauplan.md
+  cli: https://docs.bauplanlabs.com/reference/cli.md
+
+models:
+  # agent and judge are harness-native model ids, exported as AGENT_MODEL /
+  # JUDGE_MODEL env vars for harbor; generator is a full litellm model id used
+  # in-process for task generation, semantic review, and GEPA reflection
+  agent: claude-sonnet-4-6
+  judge: claude-sonnet-4-6
+  generator: anthropic/claude-sonnet-5
+  # explicit cap because litellm otherwise fills in the model's maximum output
+  # tokens, which the provider rejects for non-streaming requests
+  generator_max_tokens: 16384
+
+paths:
+  harness: harness
+  skills: harness/tasks/bauplan-eval/environment/skills
+  jobs: harness/jobs
+  dataset_entry: harness/tasks/bauplan-eval/solution/dataset_entry.json
+  dataset: dataset

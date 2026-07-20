@@ -1,0 +1,1 @@
+Read the JSON file at `/solution/dataset_entry.json`, extract the `prompt` field, and run it through a one-shot Claude Agent SDK query with `permission_mode="bypassPermissions"`. Print the agent's response.

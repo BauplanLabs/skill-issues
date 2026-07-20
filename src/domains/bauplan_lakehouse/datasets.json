@@ -1,0 +1,11 @@
+{
+  "s3_datasets": [
+    {
+      "name": "titanic",
+      "search_uri": "s3://my-bucket/titanic.csv",
+      "format": "csv",
+      "files": 1,
+      "description": "Titanic passenger survival data: demographics (age, sex, class), ticket info (fare, cabin, embarked), and survival outcome"
+    }
+  ]
+}
