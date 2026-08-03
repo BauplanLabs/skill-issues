@@ -14,7 +14,7 @@ Hence, we divide the source code into:
 1. The domain-agnostic generation/optimization engine, in `src/core`;
 2. The domain-specific deatails, in `src/domains`. 
 
-As a reference implementation, we provide the Bauplan case described in the paper in `src/domains/bauplan_lakehouse`. 
+As a reference implementation, we provide the Bauplan case described in the paper in `src/domains/bauplan_lakehouse`. If you are interested in reproducing the exact Bauplan setup, [reach out](https://www.linkedin.com/in/jacopotagliabue/) for the prompt variables. 
 
 ## Quick Start
 
